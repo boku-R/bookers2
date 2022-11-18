@@ -16,6 +16,7 @@
             <%= link_to "Sign up", user_path(current_user.id), class: 'nav-link btn btn-success btn-sm btn-block mb-3 sign_up' %>
           </div>
         <% else %>
+          <div class="row">
             <!--<a class="btn btn-info btn-sm btn-block mb-3 sign_in" href = new_user_session_path>Log in</a>-->
             <%= link_to "Log in", new_user_session_path, class: 'nav-link btn btn-info btn-sm btn-block mb-3 sign_in' %>
           </div>
