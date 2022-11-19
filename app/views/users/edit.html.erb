@@ -2,7 +2,7 @@
 
 <!--バリデーションメッセージ-->
 <% if @user.errors.any? %>
-  <p><%= @user.errors.count %>件のエラーが発生しました</p>
+  <p><%= @user.errors.count %>errors prohibited this obj from being saved:</p>
   <ul>
     <% @user.errors.full_messages.each do |message| %>
       <li><%= message %></li>
