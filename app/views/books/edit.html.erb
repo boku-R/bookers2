@@ -1,4 +1,4 @@
-<h2>Book detail</h2>
+<h2>Editing Book</h2>
 
 <%= form_with model: @book, url: update_book_path(@book.id), method: :patch do |f| %>
 
@@ -8,7 +8,9 @@
   <p>Opinion</p>
   <%= f.text_area :body %>
 
-  <%= f.submit 'Update Book',class:"btn btn-succrss" %>
+  <%= f.submit 'Update Book',class:"btn btn-success" %>
+  
+  
 
   <a>
     <%= link_to "Show", book_path(@book.id) %>

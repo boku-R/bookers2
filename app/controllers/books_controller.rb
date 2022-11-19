@@ -20,6 +20,12 @@ class BooksController < ApplicationController
     book.update(book_params)
     redirect_to book_path(book.id)
   end
+  
+  def destroy
+    book = Book.find(params[:id])
+    book.destroy #レコード削除
+    redirect_to books_path
+  end
 
   def index
     @new_book = Book.new
