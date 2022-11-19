@@ -1,3 +1,13 @@
+<!--books#newのバリデーションメッセージ-->
+<% if @book.errors.any? %>
+  <p><%= @book.errors.count %>件のエラーが発生しました</p>
+  <ul>
+    <% @book.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+    <% end %>
+  </ul>
+<% end %>
+
 <h2>Editing Book</h2>
 
 <%= form_with model: @book, url: update_book_path(@book.id), method: :patch do |f| %>
@@ -9,8 +19,8 @@
   <%= f.text_area :body %>
 
   <%= f.submit 'Update Book',class:"btn btn-success" %>
-  
-  
+
+
 
   <a>
     <%= link_to "Show", book_path(@book.id) %>
