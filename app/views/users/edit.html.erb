@@ -1,3 +1,12 @@
+<% if @user.errors.any? %>
+  <p><%= @user.errors.count %>件のエラーが発生しました</p>
+  <ul>
+    <% @user.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+    <% end %>
+  </ul>
+<% end %>
+
 <h1>User info(ユーザ情報編集画面)</h1>
 
 <%= form_with model: @user do |f| %>

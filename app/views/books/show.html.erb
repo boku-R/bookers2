@@ -1,7 +1,15 @@
 <div>
   <!--ユーザの画像を表示するところ-->
   <h2>Book detail</h2>
+  <!--投稿したユーザの画像を貼る＆users/:idに飛ぶリンクを貼る-->
+  <!--タイトルで、自身のbooks/:idに飛ぶリンクを作る-->
   <p>タイトル:<%= @book.title %></p>
   <p>感想:<%= @book.body %></p>
+
+  <!--Editボタン-->
+  <%= link_to "Edit", edit_book_path(@book.id), class: ' btn btn-success' %>
+
+  <!--Destroyボタン-->
+  <%= link_to "Destroy", book_path(@book.id), method: :delete, "data-confirm" => "本当に削除しますか？", class: ' btn btn-danger' %>
 
 </div>
