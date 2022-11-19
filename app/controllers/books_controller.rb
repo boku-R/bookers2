@@ -7,8 +7,18 @@ class BooksController < ApplicationController
     @book = Book.new(book_params)
     @book.user_id=current_user.id
     @book.save
-    # books#showにリダイレクトしないといけない
-    redirect_to user_path(current_user.id)
+    # 【済】books#showにリダイレクトしないといけない
+    redirect_to book_path(@book.id)
+  end
+
+  def edit
+    @book = Book.find(params[:id])
+  end
+
+  def update
+    book = Book.find(params[:id])
+    book.update(book_params)
+    redirect_to book_path(book.id)
   end
 
   def index
@@ -30,7 +40,7 @@ class BooksController < ApplicationController
   end
 
   def user_params
-    # ここに、画像も許可する記述が必要
+    # 【済】ここに、画像も許可する記述が必要
     params.require(:user).permit(:name,:introduction,:profile_image)
   end
 

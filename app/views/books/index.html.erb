@@ -27,8 +27,11 @@
 <!--投稿したユーザの画像を表示するところから実装します-->
 <h1>Books</h1>
 <% @books.each do |book| %>
+  <p>画像:<%= image_tag book.user.get_profile_image(100,100) %></p>
+
   <p>Title:</p>
-  <span><%= book.title %></span>
+  <%= link_to book.title, book_path(book.id) %>
+  <!--<span>< %= book.title %></span>-->
 
   <p>Opinion:</p>
   <span><%= book.body %></span>
