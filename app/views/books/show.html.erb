@@ -6,10 +6,12 @@
   <p>タイトル:<%= @book.title %></p>
   <p>感想:<%= @book.body %></p>
 
-  <!--Editボタン-->
-  <%= link_to "Edit", edit_book_path(@book.id), class: ' btn btn-success' %>
+  <%if @book.user == current_user %>
+    <!--Editボタン-->
+    <%= link_to "Edit", edit_book_path(@book.id), class: ' btn btn-success' %>
 
-  <!--Destroyボタン-->
-  <%= link_to "Destroy", book_path(@book.id), method: :delete, "data-confirm" => "本当に削除しますか？", class: ' btn btn-danger' %>
+    <!--Destroyボタン-->
+    <%= link_to "Destroy", book_path(@book.id), method: :delete, "data-confirm" => "本当に削除しますか？", class: ' btn btn-danger' %>
+  <% end %>
 
 </div>
