@@ -11,6 +11,8 @@ class BooksController < ApplicationController
     @book.user_id=current_user.id
     # バリデーションを実装
     if @book.save
+      # フラッシュメッセージを設定
+      flash[:notice] = "You have created book successfully."
       # 【済】books#showにリダイレクトしないといけない
       redirect_to book_path(@book.id)
     else
@@ -27,6 +29,8 @@ class BooksController < ApplicationController
   def update
     @book = Book.find(params[:id])
     if @book.update(book_params)
+      # フラッシュメッセージを設定
+      flash[:notice] = "You have update book successfully."
       redirect_to book_path(@book.id)
     else
       render :edit
