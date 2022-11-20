@@ -1,14 +1,14 @@
-<!--books#createのバリデーションメッセージ-->
-<% if @book.errors.any? %>
-  <p><%= @book.errors.count %>errors prohibited this obj from being saved:</p>
-  <ul>
-    <% @book.errors.full_messages.each do |message| %>
-      <li><%= message %></li>
-    <% end %>
-  </ul>
-<% end %>
-
 <div class="container">
+  <!--books#createのバリデーションメッセージ-->
+  <% if @book.errors.any? %>
+    <p><%= @book.errors.count %>errors prohibited this obj from being saved:</p>
+    <ul>
+      <% @book.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  <% end %>
+
   <div class="row">
     <div class="col-md-3">
       <h1>User info</h1>
@@ -65,6 +65,7 @@
                 <% else %>
                   <%= image_tag 'no_image', size: "100x100" %>
                 <% end %>
+                <!--<p>< %= image_tag user.get_profile_image(100,100) %></p>-->
               </td>
               <td>
                 <%= user.name %>
