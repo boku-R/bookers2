@@ -2,10 +2,6 @@ class BooksController < ApplicationController
   # 他の人が自分のユーザ情報をいじれないようにする
   before_action :is_matching_login_user, only: [:edit,:update]
 
-  def new
-    @book = Book.new
-  end
-
   def create
     @book = Book.new(book_params)
     @book.user_id=current_user.id
@@ -55,7 +51,7 @@ class BooksController < ApplicationController
     @show_book = Book.find(params[:id])
     # showにおける本の感想を書いたuserの情報を出したい
     @user = User.find(@show_book.user_id)
-    
+
     # のちのちのための記述。userコントローラのshowにて記述
     # @user = current_user
     # @books = @user.books
