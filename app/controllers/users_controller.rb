@@ -3,6 +3,10 @@ class UsersController < ApplicationController
   before_action :is_matching_login_user, only: [:edit,:update]
 
   def show
+    @book = Book.new
+    # showで見ているユーザidのユーザを指定
+    @user = User.find(params[:id])
+    @books = @user.books
   end
 
   def edit
