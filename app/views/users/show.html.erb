@@ -9,7 +9,11 @@
       <!--ユーザの情報を表示-->
       <h1>User info</h1>
       <!--画像-->
-      <p><%= image_tag @user.get_profile_image(100,100) %></p>
+      <% if @user.profile_image.attached? %>
+        <%= image_tag @user.profile_image, size: "100x100" %>
+      <% else %>
+        <%= image_tag 'no_image', size: "100x100" %>
+      <% end %>
 
         <table class ="table">
           <tbody>
@@ -24,7 +28,12 @@
           </tbody>
         </table>
 
-      <%= link_to "ユーザ情報編集", edit_user_path(current_user.id), class: ' btn btn-success' %>
+      <div class ="row">
+        <%= link_to edit_user_path(current_user.id), class: ' btn btn-outline-secondary btn-block' do %>
+          <i class="fas fa-user-cog"></i>
+        <% end %>
+      </div>
+
 
       <!--新規投稿-->
       <h1>New Book</h1>
