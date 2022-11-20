@@ -3,20 +3,53 @@
 </div>
 
 
+    <h1>User info</h1>
+    <!--画像-->
+    <% if @user.profile_image.attached? %>
+      <%= image_tag @user.profile_image, size: "100x100" %>
+    <% else %>
+      <%= image_tag 'no_image', size: "100x100" %>
+    <% end %>
+
+    <h4>name</h4>
+    <p><%= @user.name %></p>
+    <h4>Introduction</h4>
+    <p><%= @user.introduction %></p>
+    <%= link_to "ユーザ情報編集", edit_user_path(current_user.id), class: ' btn btn-success' %>
+
+  <h1>New Book</h1>
+  <%= form_with model: @book do |f| %>
+    <h4>Title</h4>
+    <%= f.text_field :title %>
+    <h4>Opinion</h4>
+    <%= f.text_area :body %>
+    <%= f.submit 'Create Book', class: "btn btn-success"%>
+  <% end %>
+
+<!--showの部分-->
 <div>
   <!--ユーザの画像を表示するところ-->
   <h2>Book detail</h2>
+  <%= link_to user_path(@user.id) do %>
+    <% if @user.profile_image.attached? %>
+      <%= image_tag @user.profile_image, size: "100x100" %>
+    <% else %>
+      <%= image_tag 'no_image', size: "100x100" %>
+    <% end %>
+    <p><%= @user.name %></p>
+  <% end %>
+
   <!--投稿したユーザの画像を貼る＆users/:idに飛ぶリンクを貼る-->
   <!--タイトルで、自身のbooks/:idに飛ぶリンクを作る-->
-  <p>タイトル:<%= @book.title %></p>
-  <p>感想:<%= @book.body %></p>
+  <p>タイトル:<%= @show_book.title %></p>
+  <p>感想:<%= @show_book.body %></p>
 
-  <%if @book.user == current_user %>
+  <%if @show_book.user == current_user %>
     <!--Editボタン-->
-    <%= link_to "Edit", edit_book_path(@book.id), class: ' btn btn-success' %>
+    <%= link_to "Edit", edit_book_path(@show_book.id), class: ' btn btn-success' %>
 
     <!--Destroyボタン-->
-    <%= link_to "Destroy", book_path(@book.id), method: :delete, "data-confirm" => "本当に削除しますか？", class: ' btn btn-danger' %>
+    <%= link_to "Destroy", book_path(@show_book.id), method: :delete, "data-confirm" => "本当に削除しますか？", class: ' btn btn-danger' %>
   <% end %>
 
 </div>
