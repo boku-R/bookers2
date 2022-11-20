@@ -8,48 +8,77 @@
   </ul>
 <% end %>
 
-<h1>User info</h1>
-    <!--画像-->
-    <% if @user.profile_image.attached? %>
-      <%= image_tag @user.profile_image, size: "100x100" %>
-    <% else %>
-      <%= image_tag 'no_image', size: "100x100" %>
-    <% end %>
+<div class="container">
+  <div class="row">
+    <div class="col-md-3">
+      <h1>User info</h1>
+        <!--画像-->
+        <% if @user.profile_image.attached? %>
+          <%= image_tag @user.profile_image, size: "100x100" %>
+        <% else %>
+          <%= image_tag 'no_image', size: "100x100" %>
+        <% end %>
 
-    <h4>name</h4>
-    <p><%= @user.name %></p>
-    <h4>Introduction</h4>
-    <p><%= @user.introduction %></p>
-    <%= link_to "ユーザ情報編集", edit_user_path(current_user.id), class: ' btn btn-success' %>
+      <table class ="table">
+        <tbody>
+          <tr>
+            <th>name</th>
+            <th><%= @user.name %></th>
+          </tr>
+          <tr>
+            <th>Introduction</th>
+            <th><%= @user.introduction %></th>
+          </tr>
+        </tbody>
+      </table>
+
+      <%= link_to "ユーザ情報編集", edit_user_path(current_user.id), class: ' btn btn-success' %>
+
+      <h1>New Book</h1>
+      <%= form_with model: @book do |f| %>
+        <h4>Title</h4>
+        <%= f.text_field :title %>
+        <h4>Opinion</h4>
+        <%= f.text_area :body %>
+        <%= f.submit 'Create Book', class: "btn btn-success"%>
+      <% end %>
+    </div>
+
+    <div class="col-md-8">
+      <!--user一覧-->
+      <!--投稿したユーザの画像を表示するところから実装します-->
+      <h1>Users</h1>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>image</th>
+            <th>name</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @users.each do |user| %>
+            <tr>
+              <td>
+                <% if user.profile_image.attached? %>
+                  <%= image_tag user.profile_image, size: "100x100" %>
+                <% else %>
+                  <%= image_tag 'no_image', size: "100x100" %>
+                <% end %>
+              </td>
+              <td>
+                <%= user.name %>
+              </td>
+              <td>
+                <%= link_to "Show" ,user_path(user.id) %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
 
 
-<h1>New Book</h1>
-  <%= form_with model: @book do |f| %>
-    <h4>Title</h4>
-    <%= f.text_field :title %>
-    <h4>Opinion</h4>
-    <%= f.text_area :body %>
-    <%= f.submit 'Create Book', class: "btn btn-success"%>
-  <% end %>
 
-
-<!--user一覧-->
-<!--投稿したユーザの画像を表示するところから実装します-->
-<h1>Users</h1>
-  <p>image.  name.</p>
-<% @users.each do |user| %>
-
-    <% if user.profile_image.attached? %>
-      <%= image_tag user.profile_image, size: "100x100" %>
-    <% else %>
-      <%= image_tag 'no_image', size: "100x100" %>
-    <% end %>
-  <!--<p>画像:< %= image_tag user.get_profile_image(100,100) %></p>-->
-
-  <%= user.name %>
-
-  <%= link_to "Show" ,user_path(user.id) %>
-  <!--< %= link_to book.title, book_path(book.id) %>-->
-  <!--<span>< %= book.title %></span>-->
-
-<% end %>
