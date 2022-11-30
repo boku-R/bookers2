@@ -51,6 +51,7 @@ class BooksController < ApplicationController
     @show_book = Book.find(params[:id])
     # showにおける本の感想を書いたuserの情報を出したい
     @user = User.find(@show_book.user_id)
+    @book_comment = BookComment.new
 
     # のちのちのための記述。userコントローラのshowにて記述
     # @user = current_user

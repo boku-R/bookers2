@@ -68,6 +68,27 @@
             <td>
               <span><%= @show_book.body %></span>
             </td>
+            <!--いいね機能-->
+            <td>
+              <% if @show_book.favorited_by?(current_user) %>
+                <p>
+                  <%= link_to book_favorites_path(@show_book), method: :delete do %>
+                    ♥<%= @show_book.favorites.count %>
+                  <% end %>
+                </p>
+              <% else %>
+                <p>
+                  <%= link_to book_favorites_path(@show_book),method: :post do %>
+                    ♡<%= @show_book.favorites.count %>
+                  <% end %>
+                </p>
+              <% end %>
+            </td>
+            <!--コメント数機能-->
+            <td>
+              <p>コメント数：<%= @show_book.book_comments.count %></p>
+            </td>
+
             <%if @show_book.user == current_user %>
               <td>
                 <!--Editボタン-->
@@ -79,11 +100,32 @@
               </td>
             <% end %>
           </tr>
+          <!--コメント投稿内容-->
+          <% @show_book.book_comments.each do |book| %>
+            <tr>
+              <td>
+                <%= link_to user_path(book.user.id) do %>
+                  <%= image_tag book.user.get_profile_image(100,100) %><%= book.user.name %>
+                <% end %>
+              </td>
+              <td><%= book.comment %></td>
+              <!--削除ボタン-->
+              <td>
+                <% if book.user == current_user %>
+                  <%= link_to "Destroy", book_book_comments_path(book.id), method: :delete ,class: ' btn btn-danger'%>
+                <% end %>
+              </td>
+            </tr>
+          <% end %>
         </tbody>
       </table>
+      <!--コメント投稿するところ-->
+      <div>
+        <%= form_with model: [@show_book,@book_comment] do |f| %>
+          <%= f.text_area :comment, rows: '5',placeholder: "コメントをここに" %>
+          <%= f.submit "送信する" %>
+        <% end %>
+      </div>
     </div>
   </div>
 </div>
-
-
-

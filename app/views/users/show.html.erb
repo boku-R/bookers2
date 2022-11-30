@@ -72,6 +72,10 @@
               <td>
                 <%= book.body %>
               </td>
+              <!--コメント数機能-->
+              <td>
+                <p>コメント数：<%= book.book_comments.count %></p>
+              </td>
             </tr>
 
           <% end %>

@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
   # 他の人が自分のユーザ情報をいじれないようにする
   before_action :is_matching_login_user, only: [:edit,:update]
+  
 
   def show
     @book = Book.new
