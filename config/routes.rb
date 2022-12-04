@@ -8,7 +8,13 @@ Rails.application.routes.draw do
     resource :favorites, only: [:create, :destroy]
     resource :book_comments, only: [:create, :destroy]
   end
-  resources :users,only: [:show,:index,:edit]
+
+  # usersの中にフォローをネストさせる
+  resources :users,only: [:show,:index,:edit] do
+    resource :relationships, only: [:create, :destroy]
+    get 'followings' => 'relationships#followings', as: 'followings'
+    get 'followers' => 'relationships#followers', as: 'followers'
+  end
 
   patch 'users/:id' => 'users#update', as: 'update_user'
   patch 'books/:id' => 'books#update', as: 'update_book'
