@@ -3,6 +3,8 @@ Rails.application.routes.draw do
   devise_for :users
 
   get '/home/about' => 'homes#about', as: 'about'
+  # 検索機能
+  get "search" => "searches#search"
 
   resources :books,only: [:create,:index,:show,:edit,:destroy] do
     resource :favorites, only: [:create, :destroy]
