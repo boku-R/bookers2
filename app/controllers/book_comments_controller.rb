@@ -5,14 +5,18 @@ class BookCommentsController < ApplicationController
     comment = current_user.book_comments.new(book_comment_params)
     comment.book_id = book.id
     comment.save
-    redirect_to book_path(book)
+    @show_book = Book.find(params[:book_id])
+    @book_comment = BookComment.new
+    # redirect_to book_path(book) #非同期のためにコメントアウト。これでjsファイルを探してくれる
   end
 
   def destroy
-    book_comment = BookComment.find(params[:book_id])
+    @show_book = Book.find(params[:book_id])
+    book_comment = BookComment.find(params[:id])
     book_comment.destroy
+    @book_comment = BookComment.new
     # BookComment.find(params[:id]).destroy
-    redirect_to book_path(book_comment.book_id)
+    # redirect_to book_path(book_comment.book_id) #非同期のためにコメントアウト。これでjsファイルを探してくれる
   end
 
   private

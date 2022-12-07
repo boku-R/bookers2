@@ -8,7 +8,7 @@ Rails.application.routes.draw do
 
   resources :books,only: [:create,:index,:show,:edit,:destroy] do
     resource :favorites, only: [:create, :destroy]
-    resource :book_comments, only: [:create, :destroy]
+    resources :book_comments, only: [:create, :destroy]
   end
 
   # usersの中にフォローをネストさせる

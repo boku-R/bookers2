@@ -62,33 +62,16 @@
               </td>
             <% end %>
           </tr>
-
-          <!--コメント投稿内容-->
-          <% @show_book.book_comments.each do |book| %>
-            <tr>
-              <td>
-                <%= link_to user_path(book.user.id) do %>
-                  <%= image_tag book.user.get_profile_image(100,100) %><%= book.user.name %>
-                <% end %>
-              </td>
-              <td><%= book.comment %></td>
-              <!--削除ボタン-->
-              <td>
-                <% if book.user == current_user %>
-                  <%= link_to "Destroy", book_book_comments_path(book.id), method: :delete ,class: ' btn btn-danger'%>
-                <% end %>
-              </td>
-            </tr>
-          <% end %>
         </tbody>
       </table>
+
+      <!--コメント投稿内容-->
+
+          <div id="book_comments"><%= render "book_comments/book_comment_index", book: @show_book %></div>
+
+
       <!--コメント投稿するところ-->
-      <div>
-        <%= form_with model: [@show_book,@book_comment] do |f| %>
-          <%= f.text_area :comment, rows: '5',placeholder: "コメントをここに" %>
-          <%= f.submit "送信する" %>
-        <% end %>
-      </div>
+      <div id="book_comment_form"><%= render "book_comments/book_comment_form", book: @show_book,book_comment: @book_comment %></div>
     </div>
   </div>
 </div>
