@@ -50,6 +50,9 @@
             <td>
               <p>コメント数：<%= @show_book.book_comments.count %></p>
             </td>
+            <td>
+              <div id="star-<%= @show_book.id %>"></div>
+            </td>
 
             <%if @show_book.user == current_user %>
               <td>
@@ -75,3 +78,20 @@
     </div>
   </div>
 </div>
+
+
+<script>
+// scriptファイルをどのidの部分に配置するかを指定
+elem = document.querySelector('#star-<%= @show_book.id %>');
+opt = {
+  //星画像の指定などのオプションをここに記述,
+  starOff: '<%= asset_path('star-off.png') %>',
+  starOn : '<%= asset_path('star-on.png') %>',
+  starHalf: '<%= asset_path('star-half.png') %>',
+  scoreName: 'book[star]',
+  half: true,
+  readOnly: true,
+  score: <%= @show_book.star %>
+ };
+raty(elem,opt);
+</script>

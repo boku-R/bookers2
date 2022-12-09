@@ -21,6 +21,8 @@
         <p>Opinion</p>
         <%= f.text_area :body %>
 
+        <div id="star-<%= @book.id %>"></div>
+
         <p><%= f.submit 'Update Book',class:"btn btn-success" %></p>
 
         <p>
@@ -34,3 +36,18 @@
   </div>
 </div>
 
+<script>
+// scriptファイルをどのidの部分に配置するかを指定
+elem = document.querySelector('#star-<%= @book.id %>');
+opt = {
+  //星画像の指定などのオプションをここに記述,
+  starOff: '<%= asset_path('star-off.png') %>',
+  starOn : '<%= asset_path('star-on.png') %>',
+  starHalf: '<%= asset_path('star-half.png') %>',
+  scoreName: 'book[star]',
+  half: true,
+  readOnly: true,
+  score: <%= @book.star %>
+ };
+raty(elem,opt);
+</script>

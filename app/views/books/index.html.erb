@@ -18,6 +18,7 @@
       <%= render 'form', book: @book %>
     </div>
 
+
     <div class = "col-md-8 offset-md-1">
       <!--投稿したユーザの画像を表示するところから実装します-->
       <h1>Books</h1>
@@ -25,6 +26,22 @@
    </div>
   </div>
 </div>
+
+      <div id="star2"></div>
+
+<script>
+  // scriptファイルをどのidの部分に配置するかを指定
+  elem = document.querySelector('#star2');
+  opt = {
+    //星画像の指定などのオプションをここに記述,
+    starOff: '<%= asset_path('star-off.png') %>',
+    starOn : '<%= asset_path('star-on.png') %>',
+    starHalf: '<%= asset_path('star-half.png') %>',
+    scoreName: 'book[star]',
+    half: true
+   };
+  raty(elem,opt);
+</script>
 
 
 
