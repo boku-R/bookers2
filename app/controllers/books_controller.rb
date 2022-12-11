@@ -66,7 +66,7 @@ class BooksController < ApplicationController
     # @user = current_user
     # @books = @user.books
   end
-  
+
   # タグ検索
   def search_tag
     @book = Book.new

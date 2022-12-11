@@ -27,8 +27,10 @@
         </td>
 
         <!--タグ-->
-        <% if book.category != "" %>
+        <% if book.category.present? %>
           <td><%= link_to book.category, search_tag_path(keyword: book.category) %></td>
+        <% else %>
+          <td>ー</td>
         <% end %>
 
         <!--いいね機能-->

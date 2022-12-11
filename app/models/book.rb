@@ -34,6 +34,7 @@ class Book < ApplicationRecord
     favorites.exists?(user_id: user.id)
   end
   
+  # タグ検索のための記述
   def self.search(search_word)
     Book.where(['category LIKE ?',"#{search_word}"])
   end
