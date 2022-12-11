@@ -12,4 +12,5 @@ class SearchesController < ApplicationController
       render "/searches/search_result"
     end
   end
+  
 end

@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   get '/home/about' => 'homes#about', as: 'about'
   # 検索機能
   get "search" => "searches#search"
+  get "search_tag" => "books#search_tag"
 
   resources :books,only: [:create,:index,:show,:edit,:destroy] do
     resource :favorites, only: [:create, :destroy]

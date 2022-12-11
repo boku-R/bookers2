@@ -25,6 +25,12 @@
         <td>
           <span><%= book.body %></span>
         </td>
+
+        <!--タグ-->
+        <% if book.category != "" %>
+          <td><%= link_to book.category, search_tag_path(keyword: book.category) %></td>
+        <% end %>
+
         <!--いいね機能-->
         <td id="favorite_buttons_<%= book.id %>">
           <%= render "favorites/favorite", book: book %>

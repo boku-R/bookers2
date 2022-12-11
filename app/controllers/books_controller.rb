@@ -31,7 +31,6 @@ class BooksController < ApplicationController
     else
       render :edit
     end
-
   end
 
   def destroy
@@ -67,13 +66,20 @@ class BooksController < ApplicationController
     # @user = current_user
     # @books = @user.books
   end
+  
+  # タグ検索
+  def search_tag
+    @book = Book.new
+    @books = Book.search(params[:keyword])
+  end
+
 
 
   # 投稿データのストロングパラメータ
   private
 
   def book_params
-    params.require(:book).permit(:title,:body,:star)
+    params.require(:book).permit(:title,:body,:star,:category)
   end
 
   def user_params
